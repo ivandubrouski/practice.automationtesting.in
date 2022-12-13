@@ -1,7 +1,7 @@
-import { expect, Page } from "@playwright/test";
+import { BrowserContext, expect, Page } from '@playwright/test';
 
-import RegisterPage from "../pages/register.page";
-import BaseActions from "./base/base.actions";
+import RegisterPage from '../pages/register.page';
+import BaseActions from './base/base.actions';
 
 interface RegisterData {
   firstName: string;
@@ -13,9 +13,9 @@ interface RegisterData {
 class RegisterActions extends BaseActions {
   registerPage: RegisterPage;
 
-  constructor(page: Page) {
-    super(page);
-    this.registerPage = new RegisterPage(page);
+  constructor(page: Page, context: BrowserContext) {
+    super(page, context);
+    this.registerPage = new RegisterPage(page, context);
   }
 
   async enterFirstName(firstName: string) {
