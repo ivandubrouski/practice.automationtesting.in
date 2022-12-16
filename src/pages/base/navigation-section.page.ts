@@ -6,6 +6,10 @@ class NavigationSection extends BasePage {
     super(page, context);
   }
 
+  get shopMenu() {
+    return this.page.locator('//a[contains(text(), "Shop")]');
+  }
+
   get pagesBtn() {
     return this.page.locator('.icon-design');
   }

@@ -1,36 +1,41 @@
 import { BrowserContext, expect, Page } from '@playwright/test';
-
 import RegisterPage from '../pages/register.page';
 import BaseActions from './base/base.actions';
+import { ENVS } from '../utils/env.utils';
+import routes from '../utils/routes.utils';
 
 interface RegisterData {
-  firstName: string;
-  lastName?: string;
   email: string;
+  invalidEmail: string;
   password: string;
+  ENVS: string;
 }
 
 class RegisterActions extends BaseActions {
   registerPage: RegisterPage;
+
+  url = 'https://practice.automationtesting.in/my-account/';
 
   constructor(page: Page, context: BrowserContext) {
     super(page, context);
     this.registerPage = new RegisterPage(page, context);
   }
 
-  async enterFirstName(firstName: string) {
-    await this.registerPage.firstNameInput.type(firstName);
-    expect(this.registerPage.firstNameInput).toHaveValue(firstName);
-  }
-
-  async enterLastName(lastName: string) {
-    await this.registerPage.lastNameInput.type(lastName);
-    expect(this.registerPage.lastNameInput).toHaveValue(lastName);
+  async openMyAccount() {
+    await this.registerPage.myAccountBtn.click();
+    if (this.registerPage.modalWindow) {
+      await this.registerPage.modalWindowCloseBtn.click();
+    }
   }
 
   async enterEmail(email: string) {
-    await this.registerPage.emailInput.type(email);
-    expect(this.registerPage.emailInput).toHaveValue(email);
+    await this.registerPage.emailAdressInput.type(email);
+    expect(this.registerPage.emailAdressInput).toHaveValue(email);
+  }
+
+  async enterInvalidEmail(invalidEmail: string) {
+    await this.registerPage.passwordInput.type(invalidEmail);
+    expect(this.registerPage.passwordInput).toHaveValue(invalidEmail);
   }
 
   async enterPassword(password: string) {
@@ -38,21 +43,25 @@ class RegisterActions extends BaseActions {
     expect(this.registerPage.passwordInput).toHaveValue(password);
   }
 
-  async enterRepeatPassword(password: string) {
-    await this.registerPage.repeatPasswordInput.type(password);
+  async checkIfRegisteredSuccess(email: string) {
+    const hello = await this.registerPage.successRegistrationText.innerText();
+    const greetingName = await this.registerPage.successRegistrationEmail.innerText();
+    const partOfEmail = email.split('@')[0];
+    expect(hello).toContain('Hello');
+    expect(greetingName).toEqual(partOfEmail);
   }
 
-  async clickCreateYourFreeAccount() {
-    await this.registerPage.createYourFreeAccountBtn.click();
+  async checkIfHomePage() {
+    await expect(this.page).toHaveURL(this.url);
   }
 
-  async registerByUI(registerData: RegisterData) {
-    await this.enterFirstName(registerData.firstName);
-    await this.enterLastName(registerData.lastName);
+  /*ready for use */
+  async registerUser(registerData: RegisterData) {
+    await this.openMyAccount();
     await this.enterEmail(registerData.email);
     await this.enterPassword(registerData.password);
-    await this.enterRepeatPassword(registerData.password);
-    await this.clickCreateYourFreeAccount();
+    await this.registerPage.registerBtn.click();
+    await this.checkIfHomePage();
   }
 }
 
