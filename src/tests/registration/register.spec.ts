@@ -2,7 +2,6 @@ import test from '../test';
 import testData from '../../fixture/smoke/register.fixture';
 import routes from '../../utils/routes.utils';
 
-// TODO: Add verify email notification
 test.describe('Registration', async () => {
   test.beforeEach(async ({ app }) => {
     await app.base.navigateTo(routes.myaccount);

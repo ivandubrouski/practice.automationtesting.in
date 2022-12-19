@@ -1,14 +1,11 @@
 import { BrowserContext, expect, Page } from '@playwright/test';
 import RegisterPage from '../pages/register.page';
 import BaseActions from './base/base.actions';
-import { ENVS } from '../utils/env.utils';
 import routes from '../utils/routes.utils';
 
 interface RegisterData {
   email: string;
-  invalidEmail: string;
   password: string;
-  ENVS: string;
 }
 
 class RegisterActions extends BaseActions {
@@ -55,7 +52,6 @@ class RegisterActions extends BaseActions {
     await expect(this.page).toHaveURL(this.url);
   }
 
-  /*ready for use */
   async registerUser(registerData: RegisterData) {
     await this.openMyAccount();
     await this.enterEmail(registerData.email);
