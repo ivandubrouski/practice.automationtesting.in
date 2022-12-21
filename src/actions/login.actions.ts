@@ -32,6 +32,10 @@ class LoginActions extends BaseActions {
     expect(hello).toContain('Hello');
     expect(greetingName).toEqual(partOfEmail);
   }
+
+  async checkErrorMessage() {
+    await expect(this.loginPage.errorMessage).toBeVisible();
+  }
 }
 
 export default LoginActions;

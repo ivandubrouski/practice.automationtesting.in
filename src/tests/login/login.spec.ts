@@ -13,4 +13,11 @@ test.describe('Login', async () => {
     await app.login.clickLoginBtn();
     await app.login.checkIfLoginSuccess(testData.username);
   });
+
+  test('Log-in with incorrect username and incorrect password', async ({ app }) => {
+    await app.login.enterUsername(testData.invalidUsername);
+    await app.login.enterPassword(testData.invalidPassword);
+    await app.login.clickLoginBtn();
+    await app.register.checkErrorMessage();
+  });
 });
