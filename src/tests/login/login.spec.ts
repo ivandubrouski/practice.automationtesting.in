@@ -20,4 +20,10 @@ test.describe('Login', async () => {
     await app.login.clickLoginBtn();
     await app.register.checkErrorMessage();
   });
+
+  test('Log-in with correct username and empty password', async ({ app }) => {
+    await app.login.enterUsername(testData.username);
+    await app.login.clickLoginBtn();
+    await app.register.checkErrorMessage();
+  });
 });
