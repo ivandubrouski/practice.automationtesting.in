@@ -1,4 +1,5 @@
 import { BrowserContext, expect, Page } from '@playwright/test';
+import BasePage from '../pages/base/base.page';
 
 import LoginPage from '../pages/login.page';
 import BaseActions from './base/base.actions';
@@ -10,6 +11,8 @@ class LoginActions extends BaseActions {
     super(page, context);
     this.loginPage = new LoginPage(page, context);
   }
+
+  url = 'https://practice.automationtesting.in/my-account/';
 
   async enterUsername(username: string) {
     await this.loginPage.usernameInput.type(username);
@@ -25,6 +28,9 @@ class LoginActions extends BaseActions {
     await this.loginPage.loginBtn.click();
   }
 
+  async clickSignOutBtn() {
+    await this.loginPage.signOutBtn.click();
+  }
   async checkIfLoginSuccess(email: string) {
     const hello = await this.loginPage.successLoginText.innerText();
     const greetingName = await this.loginPage.successLoginEmail.innerText();
@@ -35,6 +41,14 @@ class LoginActions extends BaseActions {
 
   async checkErrorMessage() {
     await expect(this.loginPage.errorMessage).toBeVisible();
+  }
+
+  async typeMarkedPassword() {
+    expect(await this.loginPage.passwordInput.getAttribute('type')).toEqual('password');
+  }
+
+  async checkIfHomePage() {
+    await expect(this.page).toHaveURL(this.url);
   }
 }
 

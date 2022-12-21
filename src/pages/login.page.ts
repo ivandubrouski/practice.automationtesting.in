@@ -13,12 +13,8 @@ class LoginPage extends BasePage {
     return this.page.locator('//input[@name="login"]');
   }
 
-  get loginRememberMe() {
-    return this.page.locator('//label[@for="rememberme"]');
-  }
-
-  get loginForgotPasswordBtn() {
-    return this.page.locator('//a[@href="https://practice.automationtesting.in/my-account/lost-password/"]');
+  get signOutBtn() {
+    return this.page.locator('//a[text()="Sign out"]');
   }
 
   get successLoginText() {
