@@ -24,6 +24,14 @@ class LoginActions extends BaseActions {
   async clickLoginBtn() {
     await this.loginPage.loginBtn.click();
   }
+
+  async checkIfLoginSuccess(email: string) {
+    const hello = await this.loginPage.successLoginText.innerText();
+    const greetingName = await this.loginPage.successLoginEmail.innerText();
+    const partOfEmail = email.split('@')[0];
+    expect(hello).toContain('Hello');
+    expect(greetingName).toEqual(partOfEmail);
+  }
 }
 
 export default LoginActions;
