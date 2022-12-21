@@ -8,38 +8,34 @@ test.describe('Registration', async () => {
   });
 
   test('Sign in', async ({ app }) => {
-    await app.register.enterEmail(testData.registerData.email);
-    await app.register.enterPassword(testData.registerData.password);
+    await app.register.enterEmail(testData.inputsID.emailInput, testData.registerData.email);
+    await app.register.enterPassword(testData.inputsID.passwordInput, testData.registerData.password);
     await app.register.registerPage.registerBtn.click();
-    await app.register.checkIfRegisteredSuccess(testData.register.email);
+    await app.register.checkIfRegisteredSuccess(testData.registerData.email);
     await app.register.checkIfHomePage();
   });
 
   test('with invalid email ID', async ({ app }) => {
-    await app.register.enterInvalidEmail(testData.registerData.invalidEmail);
-    await app.register.enterPassword(testData.registerData.password);
+    await app.register.enterInvalidEmail(testData.inputsID.emailInput, testData.registerData.invalidEmail);
+    await app.register.enterPassword(testData.inputsID.passwordInput, testData.registerData.password);
     await app.register.registerPage.registerBtn.click();
-    await app.register.checkIfRegisteredSuccess(testData.register.email);
-    await app.register.checkIfHomePage();
+    await app.register.checkErrorEmailInvalidMessage(testData.inputsID.emailInput);
   });
 
   test('with empty email ID', async ({ app }) => {
-    await app.register.enterPassword(testData.registerData.password);
+    await app.register.enterPassword(testData.inputsID.passwordInput, testData.registerData.password);
     await app.register.registerPage.registerBtn.click();
-    await app.register.checkIfRegisteredSuccess(testData.register.email);
-    await app.register.checkIfHomePage();
+    await app.register.checkErrorMessage();
   });
 
   test('with empty password', async ({ app }) => {
-    await app.register.enterEmail(testData.registerData.email);
+    await app.register.enterEmail(testData.inputsID.emailInput, testData.registerData.email);
     await app.register.registerPage.registerBtn.click();
-    await app.register.checkIfRegisteredSuccess(testData.register.email);
-    await app.register.checkIfHomePage();
+    await app.register.checkErrorMessage();
   });
 
   test('with empty email & password', async ({ app }) => {
     await app.register.registerPage.registerBtn.click();
-    await app.register.checkIfRegisteredSuccess(testData.register.email);
-    await app.register.checkIfHomePage();
+    await app.register.checkErrorMessage();
   });
 });

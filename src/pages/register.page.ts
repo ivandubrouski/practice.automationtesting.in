@@ -13,14 +13,6 @@ class RegisterPage extends BasePage {
     return this.page.locator('#dismiss-button');
   }
 
-  get emailAdressInput() {
-    return this.page.locator('#reg_email');
-  }
-
-  get passwordInput() {
-    return this.page.locator('#reg_password');
-  }
-
   get registerBtn() {
     return this.page.locator('//input[@name="register"]');
   }
@@ -31,6 +23,10 @@ class RegisterPage extends BasePage {
 
   get successRegistrationEmail() {
     return this.page.locator('//*[@class="woocommerce-MyAccount-content"]//p//strong');
+  }
+
+  get errorMessage() {
+    return this.page.locator('.woocommerce-error li');
   }
 }
 

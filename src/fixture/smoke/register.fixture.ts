@@ -7,17 +7,16 @@ const registerData = {
   email: `ivan${Date.now()}@gmail.com`,
   invalidEmail: 'qwe.com',
   password: '123456789Ivan123123',
-  passwordHard: 'd,i9-2 322cxr-.*&%$!'
+  passwordHard: 'd,i9-2 322cxr-.*&%$!',
+  ENVS: ENVS.staging
 };
 
-const register = {
-  invalidEmail: 'qwe.com',
-  email: `ivan${Date.now()}@gmail.com`,
-  password: '123456789Ivan',
-  ENVS: ENVS.staging
+const inputsID = {
+  emailInput: '#reg_email',
+  passwordInput: '#reg_password'
 };
 
 export default {
   registerData,
-  register
+  inputsID
 };
