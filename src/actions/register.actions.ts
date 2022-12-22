@@ -31,15 +31,9 @@ class RegisterActions extends BaseActions {
     expect(this.page.locator(emailInput)).toHaveValue(email);
   }
 
-  async enterInvalidEmail(emailInput: string, invalidEmail: string) {
-    await this.page.locator(emailInput).type(invalidEmail);
-    expect(this.page.locator(emailInput)).toHaveValue(invalidEmail);
-  }
-
   async enterPassword(passwordInput: string, password: string) {
     await this.page.locator(passwordInput).type(password);
-    this.page.waitForTimeout(5000);
-    expect(this.page.locator(passwordInput)).toHaveValue(password);
+    await expect(this.page.locator(passwordInput)).toHaveValue(password);
   }
 
   async checkIfRegisteredSuccess(email: string) {

@@ -6,9 +6,7 @@ const registerData = {
   lastName: 'test last name',
   email: `ivan${Date.now()}@gmail.com`,
   invalidEmail: 'qwe.com',
-  password: '123456789Ivan123123',
-  passwordHard: 'd,i9-2 322cxr-.*&%$!',
-  ENVS: ENVS.staging
+  password: '123456789Ivan123123'
 };
 
 const inputsID = {

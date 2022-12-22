@@ -16,7 +16,7 @@ test.describe('Registration', async () => {
   });
 
   test('with invalid email ID', async ({ app }) => {
-    await app.register.enterInvalidEmail(testData.inputsID.emailInput, testData.registerData.invalidEmail);
+    await app.register.enterEmail(testData.inputsID.emailInput, testData.registerData.invalidEmail);
     await app.register.enterPassword(testData.inputsID.passwordInput, testData.registerData.password);
     await app.register.registerPage.registerBtn.click();
     await app.register.checkErrorEmailInvalidMessage(testData.inputsID.emailInput);
