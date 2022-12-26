@@ -1,10 +1,6 @@
 const routes = {
   page: '/page',
-  resources: '/resources',
-  layout: '/layout',
-  signup: '/signup',
-  automations: '/automations',
-  projects: '/projects',
+  shop: '/shop',
   register: '/register',
   login: '/login'
 } as const;
