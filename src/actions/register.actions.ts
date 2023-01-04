@@ -1,13 +1,6 @@
 import { BrowserContext, expect, Page } from '@playwright/test';
 import RegisterPage from '../pages/register.page';
 import BaseActions from './base/base.actions';
-import routes from '../utils/routes.utils';
-
-interface RegisterData {
-  email: string;
-  invalidEmail: string;
-  password: string;
-}
 
 class RegisterActions extends BaseActions {
   registerPage: RegisterPage;
