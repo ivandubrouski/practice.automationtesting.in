@@ -31,11 +31,6 @@ class RegisterActions extends BaseActions {
     expect(this.page.locator(emailInput)).toHaveValue(email);
   }
 
-  async enterInvalidEmail(emailInput: string, invalidEmail: string) {
-    await this.page.locator(emailInput).type(invalidEmail);
-    expect(this.page.locator(emailInput)).toHaveValue(invalidEmail);
-  }
-
   async enterPassword(passwordInput: string, password: string) {
     await this.page.locator(passwordInput).type(password);
     this.page.waitForTimeout(5000);
@@ -57,10 +52,6 @@ class RegisterActions extends BaseActions {
   async checkErrorEmailInvalidMessage(inputsID: string) {
     const validationMessage: string = await this.page.$eval(inputsID, elem => elem.validationMessage);
     expect(validationMessage.length).toBeGreaterThan(0);
-  }
-
-  async checkErrorMessage() {
-    await expect(this.registerPage.errorMessage).toBeVisible();
   }
 }
 

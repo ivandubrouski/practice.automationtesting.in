@@ -16,7 +16,7 @@ test.describe('Registration', async () => {
   });
 
   test('with invalid email ID', async ({ app }) => {
-    await app.register.enterInvalidEmail(testData.inputsID.emailInput, testData.registerData.invalidEmail);
+    await app.register.enterEmail(testData.inputsID.emailInput, testData.registerData.invalidEmail);
     await app.register.enterPassword(testData.inputsID.passwordInput, testData.registerData.password);
     await app.register.registerPage.registerBtn.click();
     await app.register.checkErrorEmailInvalidMessage(testData.inputsID.emailInput);
@@ -25,17 +25,17 @@ test.describe('Registration', async () => {
   test('with empty email ID', async ({ app }) => {
     await app.register.enterPassword(testData.inputsID.passwordInput, testData.registerData.password);
     await app.register.registerPage.registerBtn.click();
-    await app.register.checkErrorMessage();
+    await app.base.checkErrorMessage(app.base.errorMessage);
   });
 
   test('with empty password', async ({ app }) => {
     await app.register.enterEmail(testData.inputsID.emailInput, testData.registerData.email);
     await app.register.registerPage.registerBtn.click();
-    await app.register.checkErrorMessage();
+    await app.base.checkErrorMessage(app.base.errorMessage);
   });
 
   test('with empty email & password', async ({ app }) => {
     await app.register.registerPage.registerBtn.click();
-    await app.register.checkErrorMessage();
+    await app.base.checkErrorMessage(app.base.errorMessage);
   });
 });

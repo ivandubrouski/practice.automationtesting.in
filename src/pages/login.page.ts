@@ -24,10 +24,6 @@ class LoginPage extends BasePage {
   get successLoginEmail() {
     return this.page.locator('//*[@class="woocommerce-MyAccount-content"]//p//strong');
   }
-
-  get errorMessage() {
-    return this.page.locator('.woocommerce-error li');
-  }
 }
 
 export default LoginPage;

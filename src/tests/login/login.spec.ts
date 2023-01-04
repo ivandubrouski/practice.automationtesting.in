@@ -16,27 +16,27 @@ test.describe('Login', async () => {
   });
 
   test('Log-in with incorrect username and incorrect password', async ({ app }) => {
-    await app.login.enterUsername(testData.invalidUsername);
-    await app.login.enterPassword(testData.invalidPassword);
+    await app.login.enterUsername(testData.errorData);
+    await app.login.enterPassword(testData.errorData);
     await app.login.clickLoginBtn();
-    await app.register.checkErrorMessage();
+    await app.base.checkErrorMessage(app.base.errorMessage);
   });
 
   test('Log-in with correct username and empty password', async ({ app }) => {
     await app.login.enterUsername(testData.username);
     await app.login.clickLoginBtn();
-    await app.register.checkErrorMessage();
+    await app.base.checkErrorMessage(app.base.errorMessage);
   });
 
   test('Log-in with empty username and valid password', async ({ app }) => {
     await app.login.enterPassword(testData.password);
     await app.login.clickLoginBtn();
-    await app.register.checkErrorMessage();
+    await app.base.checkErrorMessage(app.base.errorMessage);
   });
 
   test('Log-in with empty username and empty password', async ({ app }) => {
     await app.login.clickLoginBtn();
-    await app.register.checkErrorMessage();
+    await app.base.checkErrorMessage(app.base.errorMessage);
   });
 
   test('Log-in -Password should be masked', async ({ app }) => {
@@ -45,10 +45,10 @@ test.describe('Login', async () => {
   });
 
   test('Login-Handles case sensitive', async ({ app }) => {
-    await app.login.enterUsername(testData.invalidUsername.toUpperCase());
-    await app.login.enterPassword(testData.invalidPassword.toUpperCase());
+    await app.login.enterUsername(testData.errorData.toUpperCase());
+    await app.login.enterPassword(testData.errorData.toUpperCase());
     await app.login.clickLoginBtn();
-    await app.register.checkErrorMessage();
+    await app.base.checkErrorMessage(app.base.errorMessage);
   });
 
   test('Login-Authentication', async ({ app }) => {

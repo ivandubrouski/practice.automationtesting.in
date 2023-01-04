@@ -1,4 +1,5 @@
 import { BrowserContext, expect, Page } from '@playwright/test';
+import config from '../../playwright.config';
 import BasePage from '../pages/base/base.page';
 
 import LoginPage from '../pages/login.page';
@@ -11,8 +12,6 @@ class LoginActions extends BaseActions {
     super(page, context);
     this.loginPage = new LoginPage(page, context);
   }
-
-  url = 'https://practice.automationtesting.in/my-account/';
 
   async enterUsername(username: string) {
     await this.loginPage.usernameInput.type(username);
@@ -39,16 +38,12 @@ class LoginActions extends BaseActions {
     expect(greetingName).toEqual(partOfEmail);
   }
 
-  async checkErrorMessage() {
-    await expect(this.loginPage.errorMessage).toBeVisible();
-  }
-
   async typeMarkedPassword() {
     expect(await this.loginPage.passwordInput.getAttribute('type')).toEqual('password');
   }
 
   async checkIfHomePage() {
-    await expect(this.page).toHaveURL(this.url);
+    await expect(this.page).toHaveURL(config.use.baseURL);
   }
 }
 
