@@ -5,6 +5,7 @@ import routes from '../utils/routes.utils';
 
 interface RegisterData {
   email: string;
+  invalidEmail: string;
   password: string;
 }
 
@@ -25,19 +26,15 @@ class RegisterActions extends BaseActions {
     }
   }
 
-  async enterEmail(email: string) {
-    await this.registerPage.emailAdressInput.type(email);
-    expect(this.registerPage.emailAdressInput).toHaveValue(email);
+  async enterEmail(emailInput: string, email: string) {
+    await this.page.locator(emailInput).type(email);
+    expect(this.page.locator(emailInput)).toHaveValue(email);
   }
 
-  async enterInvalidEmail(invalidEmail: string) {
-    await this.registerPage.passwordInput.type(invalidEmail);
-    expect(this.registerPage.passwordInput).toHaveValue(invalidEmail);
-  }
-
-  async enterPassword(password: string) {
-    await this.registerPage.passwordInput.type(password);
-    expect(this.registerPage.passwordInput).toHaveValue(password);
+  async enterPassword(passwordInput: string, password: string) {
+    await this.page.locator(passwordInput).type(password);
+    this.page.waitForTimeout(5000);
+    expect(this.page.locator(passwordInput)).toHaveValue(password);
   }
 
   async checkIfRegisteredSuccess(email: string) {
@@ -52,12 +49,9 @@ class RegisterActions extends BaseActions {
     await expect(this.page).toHaveURL(this.url);
   }
 
-  async registerUser(registerData: RegisterData) {
-    await this.openMyAccount();
-    await this.enterEmail(registerData.email);
-    await this.enterPassword(registerData.password);
-    await this.registerPage.registerBtn.click();
-    await this.checkIfHomePage();
+  async checkErrorEmailInvalidMessage(inputsID: string) {
+    const validationMessage: string = await this.page.$eval(inputsID, elem => elem.validationMessage);
+    expect(validationMessage.length).toBeGreaterThan(0);
   }
 }
 
