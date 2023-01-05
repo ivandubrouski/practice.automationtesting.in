@@ -5,6 +5,7 @@ import HeaderActions from './base/header.actions';
 import NavigationSectionActions from './base/navigation-section.actions';
 import LoginActions from './login.actions';
 import RegisterActions from './register.actions';
+import ShopActions from './shop.actions';
 
 export default class App {
   base: BaseActions;
@@ -12,6 +13,7 @@ export default class App {
   login: LoginActions;
   register: RegisterActions;
   navigation: NavigationSectionActions;
+  shop: ShopActions;
 
   constructor(page: Page, context: BrowserContext) {
     this.base = new BaseActions(page, context);
@@ -19,5 +21,6 @@ export default class App {
     this.login = new LoginActions(page, context);
     this.register = new RegisterActions(page, context);
     this.navigation = new NavigationSectionActions(page, context);
+    this.shop - new ShopActions(page, context);
   }
 }
