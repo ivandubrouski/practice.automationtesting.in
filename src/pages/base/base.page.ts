@@ -19,4 +19,8 @@ export default class BasePage {
     const page: Page = isNewPage ? this.Map.get('newPage') : this.page;
     return page;
   }
+
+  get errorMessage() {
+    return this.page.locator('.woocommerce-error li');
+  }
 }

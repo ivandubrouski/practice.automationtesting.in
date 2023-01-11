@@ -1,4 +1,3 @@
-import { expect } from '@playwright/test';
 import test from '../test';
 import shopData from '../../fixture/smoke/shop.fixture';
 import routes from '../../utils/routes.utils';
