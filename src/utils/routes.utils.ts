@@ -1,4 +1,5 @@
 const routes = {
+  myaccount: '/my-account',
   page: '/page',
   shop: '/shop',
   register: '/register',

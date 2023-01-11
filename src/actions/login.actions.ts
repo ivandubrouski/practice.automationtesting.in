@@ -1,4 +1,6 @@
 import { BrowserContext, expect, Page } from '@playwright/test';
+import config from '../../playwright.config';
+import BasePage from '../pages/base/base.page';
 
 import LoginPage from '../pages/login.page';
 import BaseActions from './base/base.actions';
@@ -23,6 +25,25 @@ class LoginActions extends BaseActions {
 
   async clickLoginBtn() {
     await this.loginPage.loginBtn.click();
+  }
+
+  async clickSignOutBtn() {
+    await this.loginPage.signOutBtn.click();
+  }
+  async checkIfLoginSuccess(email: string) {
+    const hello = await this.loginPage.successLoginText.innerText();
+    const greetingName = await this.loginPage.successLoginEmail.innerText();
+    const partOfEmail = email.split('@')[0];
+    expect(hello).toContain('Hello');
+    expect(greetingName).toEqual(partOfEmail);
+  }
+
+  async typeMarkedPassword() {
+    expect(await this.loginPage.passwordInput.getAttribute('type')).toEqual('password');
+  }
+
+  async checkIfHomePage() {
+    await expect(this.page).toHaveURL(config.use.baseURL);
   }
 }
 

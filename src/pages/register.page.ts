@@ -1,28 +1,32 @@
 import BasePage from './base/base.page';
 
 class RegisterPage extends BasePage {
-  get firstNameInput() {
-    return this.page.locator("[data-control='first_name']");
+  get myAccountBtn() {
+    return this.page.locator('//a[@href="https://practice.automationtesting.in/my-account/"]');
   }
 
-  get lastNameInput() {
-    return this.page.locator("[data-control='last_name']");
+  get modalWindow() {
+    return this.page.locator('#ad_position_box');
   }
 
-  get emailInput() {
-    return this.page.locator("[data-control='email']");
+  get modalWindowCloseBtn() {
+    return this.page.locator('#dismiss-button');
   }
 
-  get passwordInput() {
-    return this.page.locator("[data-control='password']");
+  get registerBtn() {
+    return this.page.locator('//input[@name="register"]');
   }
 
-  get repeatPasswordInput() {
-    return this.page.locator("[data-control='password_repeat']");
+  get successRegistrationText() {
+    return this.page.locator('//*[@class="woocommerce-MyAccount-content"]//p[1]');
   }
 
-  get createYourFreeAccountBtn() {
-    return this.page.locator('.button_primary');
+  get successRegistrationEmail() {
+    return this.page.locator('//*[@class="woocommerce-MyAccount-content"]//p//strong');
+  }
+
+  get errorMessage() {
+    return this.page.locator('.woocommerce-error li');
   }
 }
 

@@ -1,58 +1,49 @@
 import { BrowserContext, expect, Page } from '@playwright/test';
-
 import RegisterPage from '../pages/register.page';
 import BaseActions from './base/base.actions';
 
-interface RegisterData {
-  firstName: string;
-  lastName?: string;
-  email: string;
-  password: string;
-}
-
 class RegisterActions extends BaseActions {
   registerPage: RegisterPage;
+
+  url = 'https://practice.automationtesting.in/my-account/';
 
   constructor(page: Page, context: BrowserContext) {
     super(page, context);
     this.registerPage = new RegisterPage(page, context);
   }
 
-  async enterFirstName(firstName: string) {
-    await this.registerPage.firstNameInput.type(firstName);
-    expect(this.registerPage.firstNameInput).toHaveValue(firstName);
+  async openMyAccount() {
+    await this.registerPage.myAccountBtn.click();
+    if (this.registerPage.modalWindow) {
+      await this.registerPage.modalWindowCloseBtn.click();
+    }
   }
 
-  async enterLastName(lastName: string) {
-    await this.registerPage.lastNameInput.type(lastName);
-    expect(this.registerPage.lastNameInput).toHaveValue(lastName);
+  async enterEmail(emailInput: string, email: string) {
+    await this.page.locator(emailInput).type(email);
+    expect(this.page.locator(emailInput)).toHaveValue(email);
   }
 
-  async enterEmail(email: string) {
-    await this.registerPage.emailInput.type(email);
-    expect(this.registerPage.emailInput).toHaveValue(email);
+  async enterPassword(passwordInput: string, password: string) {
+    await this.page.locator(passwordInput).type(password);
+    await expect(this.page.locator(passwordInput)).toHaveValue(password);
   }
 
-  async enterPassword(password: string) {
-    await this.registerPage.passwordInput.type(password);
-    expect(this.registerPage.passwordInput).toHaveValue(password);
+  async checkIfRegisteredSuccess(email: string) {
+    const hello = await this.registerPage.successRegistrationText.innerText();
+    const greetingName = await this.registerPage.successRegistrationEmail.innerText();
+    const partOfEmail = email.split('@')[0];
+    expect(hello).toContain('Hello');
+    expect(greetingName).toEqual(partOfEmail);
   }
 
-  async enterRepeatPassword(password: string) {
-    await this.registerPage.repeatPasswordInput.type(password);
+  async checkIfHomePage() {
+    await expect(this.page).toHaveURL(this.url);
   }
 
-  async clickCreateYourFreeAccount() {
-    await this.registerPage.createYourFreeAccountBtn.click();
-  }
-
-  async registerByUI(registerData: RegisterData) {
-    await this.enterFirstName(registerData.firstName);
-    await this.enterLastName(registerData.lastName);
-    await this.enterEmail(registerData.email);
-    await this.enterPassword(registerData.password);
-    await this.enterRepeatPassword(registerData.password);
-    await this.clickCreateYourFreeAccount();
+  async checkErrorEmailInvalidMessage(inputsID: string) {
+    const validationMessage: string = await this.page.$eval(inputsID, elem => elem.validationMessage);
+    expect(validationMessage.length).toBeGreaterThan(0);
   }
 }
 

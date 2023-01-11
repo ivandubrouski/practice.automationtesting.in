@@ -1,13 +1,20 @@
 import routes from '../../utils/routes.utils';
+import { ENVS } from '../../utils/env.utils';
 
 const registerData = {
   firstName: 'test first name',
   lastName: 'test last name',
-  email: `robocop${Date.now()}@mail.com`,
-  password: '12345'
+  email: `ivan${Date.now()}@gmail.com`,
+  invalidEmail: 'qwe.com',
+  password: '123456789Ivan123123'
+};
+
+const inputsID = {
+  emailInput: '#reg_email',
+  passwordInput: '#reg_password'
 };
 
 export default {
   registerData,
-  url: routes.projects
+  inputsID
 };
