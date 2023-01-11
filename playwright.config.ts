@@ -38,13 +38,15 @@ const config: PlaywrightTestConfig = {
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    video: 'retain-on-failure',
+
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
 
     navigationTimeout: 30000,
 
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: ENVS.dev,
+    baseURL: ENVS.staging,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -97,10 +99,10 @@ const config: PlaywrightTestConfig = {
     //     channel: 'chrome',
     //   },
     // },
-  ]
+  ],
 
-  /* Folder for test artifacts such as screenshots, videos, traces, etc. */
-  // outputDir: 'test-results/',
+  /*Folder for test artifacts such as screenshots, videos, traces, etc. */
+  outputDir: 'test-results/'
 
   /* Run your local dev server before starting the tests */
   // webServer: {
