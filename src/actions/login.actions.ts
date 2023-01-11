@@ -1,6 +1,5 @@
 import { BrowserContext, expect, Page } from '@playwright/test';
 import config from '../../playwright.config';
-import BasePage from '../pages/base/base.page';
 
 import LoginPage from '../pages/login.page';
 import BaseActions from './base/base.actions';

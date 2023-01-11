@@ -21,6 +21,6 @@ export default class App {
     this.login = new LoginActions(page, context);
     this.register = new RegisterActions(page, context);
     this.navigation = new NavigationSectionActions(page, context);
-    this.shop - new ShopActions(page, context);
+    this.shop = new ShopActions(page, context);
   }
 }

@@ -6,7 +6,6 @@ export default class BaseActions extends BasePage {
   async navigateTo(route: Utils.Routes) {
     await this.page.goto(route, { timeout: 100000 });
   }
-
   async checkErrorMessage(locator: Locator) {
     await expect(locator).toBeVisible();
   }

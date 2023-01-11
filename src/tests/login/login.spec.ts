@@ -1,4 +1,3 @@
-import { Page } from '@playwright/test';
 import test from '../test';
 import testData from '../../fixture/smoke/login.fixture';
 import routes from '../../utils/routes.utils';
