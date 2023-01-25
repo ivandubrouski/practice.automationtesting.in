@@ -1,6 +1,3 @@
-import routes from '../../utils/routes.utils';
-import { ENVS } from '../../utils/env.utils';
-
 const registerData = {
   firstName: 'test first name',
   lastName: 'test last name',
